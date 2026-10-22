@@ -1,39 +1,40 @@
-# Brand Logos
+# Brand Logos ٩(^ᴗ^)۶
 
-Over 3,400 brand logos, one drag away from your Drawdy board: social networks, chat apps, streaming, shopping, payments, work tools and more, each in its own brand colour.
+**real logos for your plans, in their real colours.**
 
-## What it's for
+Over 3,400 brands: social networks, chat apps, streaming, shopping, payments and work tools. Drop them on a content calendar or a customer journey and everyone sees the channel at a glance ✧
 
-- **Content calendars and channel plans**: mark which post goes to Instagram, TikTok, YouTube or LINE.
-- **Customer journeys and funnels**: show where people find you, chat with you and pay you.
-- **Competitor maps and tool stacks**: put the real logos on the board instead of typing names.
+![Opening Brand Logos' Social category, dragging Instagram, TikTok and YouTube onto a Drawdy board in their brand colours, then searching for Shopee and adding it too](https://raw.githubusercontent.com/mickyngub/drawdy-brand-logos/main/docs/media/brand-logos.gif)
 
-## How to use
+---
 
-1. Click the **Brand Logos** button on the right of the board.
-2. Pick a category: **All**, **Social**, **Messaging & calls**, **Video & streaming**, **Music & podcasts**, **Shopping**, **Payments**, **Work & productivity**, **Marketing & ads**, **Creator tools** or **Food & travel**. Or type in the search box; press `/` to jump to it. Short forms work too, such as `ig` for Instagram or `twitter` for X.
-3. Drag a logo onto the board and let go where you want it. Or click it to add it in the middle of your view; more clicks line logos up in rows instead of stacking them.
-4. In the search box, press Enter to add the top result.
+## let's plan ٩(◕‿◕)۶
 
-## Options
+1. Click the **megaphone** in the extension rail.
+2. Search a brand, like *Instagram*, *LINE* or *Visa* (short forms such as *ig* work too), or pick a category: Social, Messaging & calls, Shopping, Payments and more. Press `/` to jump to search.
+3. Drag a logo onto the board. Or click it to add it in the middle of your view; more clicks line up in a row.
+4. Press **Enter** in the search box to add the top result.
 
-- **Size**: S, M, L or XL, from 32 to 256 board units.
-- **Colour**: **Brand colours** (the default) paints each logo in its official colour; black and white logos follow the board's ink so they show on light and dark boards. Or pick Ink, four Drawdy colours or any colour, to make a set of logos match.
-- **Label**: the brand's name, centred under the logo. On by default, and the logo and its label are grouped so they move together.
+> (・_・;) **logos still loading?** They download as you scroll, so give a slow connection a second.
 
-## Tips
+---
 
-- A few logos, such as LinkedIn, Slack, Microsoft Teams and the Adobe apps, come in their full-colour versions and keep their own colours.
-- Your last 12 logos stay in a **Recent** row, and the palette remembers your options.
-- Logos are vector images, so they stay sharp however far you zoom in.
+## make it yours (｡•̀ᴗ-)✧
 
-## Privacy
+- **Brand colours** (the default): each logo in its official colour. Black and white logos follow the board's ink so they show on light and dark boards.
+- **One colour for all**: ink, four Drawdy colours, or any colour you pick, for a tidy matching set.
+- **Label**: the brand's name underneath, on by default and grouped with the logo.
+- **Size**: S, M, L or XL.
 
-- The logos download from the Iconify API as you scroll. Nothing you draw or type is sent anywhere.
-- Your recent logos and options are saved in this browser, so they are the same on every board you open here.
+---
 
-## Credits and licence
+## little things to try (っ˘ω˘ς )
 
-- Logos from [Simple Icons](https://simpleicons.org) (CC0) and [SVG Logos](https://github.com/gilbarbara/logos) (CC0), served by [Iconify](https://iconify.design).
-- Every logo is a trademark of its owner and is shown only to refer to that brand. It does not mean the brand endorses this extension.
-- The extension's code is [MIT](https://github.com/mickyngub/drawdy-brand-logos/blob/main/LICENSE). Building it yourself? See [DEVELOPMENT.md](https://github.com/mickyngub/drawdy-brand-logos/blob/main/DEVELOPMENT.md).
+- A weekly content calendar with a logo on every post.
+- The customer journey: where people find you, chat with you and pay you.
+- A competitor map, logos in ink so nobody's colour wins.
+- Your last 12 logos wait in **Recent** for the next plan.
+
+---
+
+**the small print**: logos download from the Iconify API as you scroll; nothing you draw or type leaves your board. Your recent logos and options stay in this browser. Logos from [Simple Icons](https://simpleicons.org) (CC0) and [SVG Logos](https://github.com/gilbarbara/logos) (CC0). Every logo is a trademark of its owner, shown only to refer to that brand; it does not mean the brand endorses this extension. Code [MIT](https://github.com/mickyngub/drawdy-brand-logos/blob/main/LICENSE); building it yourself? See [DEVELOPMENT.md](https://github.com/mickyngub/drawdy-brand-logos/blob/main/DEVELOPMENT.md).
