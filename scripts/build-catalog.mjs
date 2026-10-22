@@ -2,12 +2,19 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getIconSlug } from "simple-icons/sdk";
+import { paint } from "../src/paint.ts";
 import { CATEGORIES, EXTRA_KEYWORDS, FALLBACKS } from "./brand-categories.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "src", "catalog-data.ts");
 const HEX = /^[0-9A-F]{6}$/;
 const NAME = /^[a-z0-9-]+$/;
+const BODY_COLOR = /(?:fill|stop-color)="#([0-9a-f]{6}|[0-9a-f]{3})"/i;
+// The picker's tile colour in the dark and the light theme. A mark closer
+// than FADED to one of them is drawn on a contrasting plate in that theme.
+const DARK_TILE = "29292D";
+const LIGHT_TILE = "FFFFFF";
+const FADED = 1.8;
 
 const readJson = (...path) =>
     JSON.parse(readFileSync(join(ROOT, "node_modules", ...path), "utf8"));
@@ -27,6 +34,42 @@ function aliasWords(aliases = {}) {
     ];
 }
 
+function luminance(hex) {
+    const n = parseInt(hex, 16);
+    const linear = (c) =>
+        c / 255 <= 0.04045
+            ? c / 255 / 12.92
+            : ((c / 255 + 0.055) / 1.055) ** 2.4;
+    return (
+        0.2126 * linear(n >> 16) +
+        0.7152 * linear((n >> 8) & 255) +
+        0.0722 * linear(n & 255)
+    );
+}
+
+function contrast(a, b) {
+    const [x, y] = [luminance(a), luminance(b)].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05);
+}
+
+export function markTone(hex) {
+    if (contrast(hex, DARK_TILE) < FADED) return "dark";
+    if (contrast(hex, LIGHT_TILE) < FADED) return "light";
+    return undefined;
+}
+
+// SVG Logos draw their base shape first, so its colour decides.
+function baseColor(body) {
+    const hex = body.match(BODY_COLOR)?.[1];
+    if (hex === undefined) return undefined;
+    return hex.length === 3 ? hex.replace(/./g, (c) => c + c) : hex;
+}
+
+const withMark = (entry, hex) => {
+    const mark = hex === undefined ? undefined : markTone(hex);
+    return mark === undefined ? entry : { ...entry, mark };
+};
+
 const byTitle = (a, b) => {
     const x = a.title.toLowerCase();
     const y = b.title.toLowerCase();
@@ -45,18 +88,29 @@ export function buildCatalog(simpleIcons, siIconify, logosIconify, curated) {
         if (!siServed.has(name) || !NAME.test(name)) continue;
         if (!HEX.test(brand.hex))
             throw new Error(`${name}: bad hex ${brand.hex}`);
-        entries.set(name, {
+        const entry = {
             name,
             title: brand.title,
             keywords: aliasWords(brand.aliases),
             prefix: "simple-icons",
             hex: brand.hex,
-        });
+        };
+        const fill = paint(entry, "brand", "ink").recolor.currentcolor;
+        entries.set(
+            name,
+            withMark(entry, fill === "ink" ? undefined : fill.slice(1))
+        );
     }
     for (const [name, title] of curated.fallbacks) {
         if (!logosServed.has(name)) throw new Error(`logos has no ${name}`);
         if (entries.has(name)) throw new Error(`${name} is in Simple Icons`);
-        entries.set(name, { name, title, keywords: [], prefix: "logos" });
+        entries.set(
+            name,
+            withMark(
+                { name, title, keywords: [], prefix: "logos" },
+                baseColor(logosIconify.icons[name]?.body ?? "")
+            )
+        );
     }
     for (const [name, words] of Object.entries(curated.extraKeywords)) {
         const entry = entries.get(name);

@@ -83,7 +83,6 @@ let options: PlaceOptions = {
     label: true,
 };
 let searchTimer: ReturnType<typeof setTimeout> | null = null;
-let chipsTimer: ReturnType<typeof setTimeout> | null = null;
 
 const observer = new IntersectionObserver(
     (seen) => {
@@ -182,9 +181,17 @@ function send(icon: IconRef, point: { x: number; y: number } | null): void {
     );
 }
 
+// Only a mark drawn in its own colours can fade into the tile.
+function setMark(element: HTMLElement, icon: IconRef): void {
+    const own = icon.prefix !== "simple-icons" || options.color === "brand";
+    const mark = own ? byName.get(icon.name)?.icon.mark : undefined;
+    if (mark !== undefined) element.dataset.mark = mark;
+}
+
 function makeGhost(icon: IconRef): HTMLDivElement {
     const ghost = document.createElement("div");
     ghost.className = GHOST;
+    setMark(ghost, icon);
     const cached = cachedSvg(icon);
     if (cached !== undefined) paintSvg(ghost, icon, cached);
     document.body.appendChild(ghost);
@@ -204,6 +211,7 @@ function makeTile(icon: IconRef, eager: boolean): Tile {
     tile.setAttribute("aria-label", icon.title);
     tile.dataset.icon = keyOf(icon);
     tile.iconRef = icon;
+    setMark(tile, icon);
 
     const cached = cachedSvg(icon);
     if (cached !== undefined) {
@@ -356,10 +364,11 @@ function renderChips(): void {
         }
     }
     for (const chip of chipsEl.querySelectorAll<HTMLButtonElement>("button")) {
-        chip.setAttribute(
-            "aria-pressed",
-            String(chip.dataset.category === category)
-        );
+        const selected = chip.dataset.category === category;
+        chip.setAttribute("aria-pressed", String(selected));
+        if (selected) {
+            chip.scrollIntoView({ inline: "nearest", block: "nearest" });
+        }
     }
 }
 
@@ -481,15 +490,6 @@ document.addEventListener("keydown", (event) => {
     }
     event.preventDefault();
     searchEl.focus();
-});
-
-chipsEl.addEventListener("scroll", () => {
-    chipsEl.dataset.scrolling = "true";
-    if (chipsTimer !== null) clearTimeout(chipsTimer);
-    chipsTimer = setTimeout(() => {
-        chipsEl.dataset.scrolling = "false";
-        chipsTimer = null;
-    }, 800);
 });
 
 chipsEl.addEventListener(

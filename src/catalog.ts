@@ -4,6 +4,8 @@ export type CatalogIcon = {
     keywords: string;
     prefix: "simple-icons" | "logos";
     hex?: string;
+    // Set when the mark nearly vanishes on the picker's tile in one theme.
+    mark?: "dark" | "light";
 };
 
 export type Category = {

@@ -102,3 +102,12 @@ test("All lists every brand by title", () => {
     const titles = ICONS.map((icon) => icon.title.toLowerCase());
     assert.deepEqual(titles, [...titles].sort());
 });
+
+test("marks that fade into a theme's tile ask for a contrasting plate", () => {
+    assert.equal(byName.get("1and1")?.mark, "dark");
+    assert.equal(byName.get("dotenv")?.mark, "light");
+    assert.equal(byName.get("adobe-xd")?.mark, "dark");
+    assert.equal(byName.get("facebook")?.mark, undefined);
+    // Pure black brands are drawn in the board's ink, which never fades.
+    assert.equal(byName.get("x")?.mark, undefined);
+});
