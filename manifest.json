@@ -1,7 +1,7 @@
 {
     "driverId": "mickyngub.brand-logos",
     "driverName": "Brand Logos",
-    "driverVersion": "1.0.1",
+    "driverVersion": "1.0.2",
     "description": "Real logos for your plans, in their real colours. Search over 3,400 brands (Instagram, LINE, Shopee, Visa) or browse Social, Payments and more, then drag a logo onto the board or click to add it in view. Each lands in its brand colour with its name, or in any one colour you pick. Made for content calendars, customer journeys and competitor maps.",
     "icon": "icon.png",
     "main": "main.js",
