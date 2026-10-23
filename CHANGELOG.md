@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+- The panel now uses Drawdy's own colours and font, with a more compact header so more logos fit
+- Category chips scroll with a fade at the edge, and selected options are grey instead of lime
+- Logos that would vanish on their tile, such as a black mark in the dark theme, sit on a contrasting plate
+
 ## 1.0.0
 
 First public release
